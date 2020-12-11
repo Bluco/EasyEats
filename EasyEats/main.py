@@ -46,10 +46,10 @@ def details():
     crowd=IntVar()
     Label(root2, text = restaurantData[index][0]).pack()
     if index == 0:
-        photo4 = PhotoImage(file="mcdonalds.png")
+        photo4 = PhotoImage(file="mcdonaldsmenu.png")
         Label(root2, image=photo4).pack()
     elif index == 1:
-        photo4 = PhotoImage(file="chipotle.png")
+        photo4 = PhotoImage(file="chipotlemenu.png")
         Label(root2, image=photo4).pack()
     elif index == 2:
         photo4 = PhotoImage(file="heng.png")
