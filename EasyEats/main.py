@@ -3,9 +3,12 @@ from tkinter import *
 restaurantData = [["McDonald's", "Low Mask Usage", "Medium Crowd", "555-6789"],
             ["Chipotle", "Medium Mask Usage", "Low crowd", "123-7777"],
             ["Heng's Fancy Eatings", "High Mask Usage", "High crowd", "420-1313"]]
+maskCrowdData = [[1, 0, 0, 0, 1, 0], [0, 1, 0, 1, 0, 0], [0, 0, 1, 0, 0, 1]]
 
 index = 0
 clicked = False
+mask = -1
+crowd = -1
 
 root = Tk()
 def browse():
@@ -37,12 +40,48 @@ def details2():
     details()
 
 def details():
+    global photo4, mask, crowd, root2
     root2 = Toplevel()
-    t1 = Label(root2, text=restaurantData[index][0]).pack()
-    t2 = Label(root2, text=restaurantData[index][1]).pack()
-    t3 = Label(root2, text=restaurantData[index][2]).pack()
-    t4 = Label(root2, text=restaurantData[index][3]).pack()
-    #backButton = Button(root2, text="Back to Restaurants", command=browse).pack()
+    mask=IntVar()
+    crowd=IntVar()
+    Label(root2, text = restaurantData[index][0]).pack()
+    if index == 0:
+        photo4 = PhotoImage(file="mcdonalds.png")
+        Label(root2, image=photo4).pack()
+    elif index == 1:
+        photo4 = PhotoImage(file="chipotle.png")
+        Label(root2, image=photo4).pack()
+    elif index == 2:
+        photo4 = PhotoImage(file="heng.png")
+        Label(root2, image=photo4).pack()
+    Label(root2, text="Low mask usage reported").pack()
+    Label(root2, text=maskCrowdData[index][0]).pack()
+    Label(root2, text="Medium mask usage reported").pack()
+    Label(root2, text=maskCrowdData[index][1]).pack()
+    Label(root2, text="High mask usage reported").pack()
+    Label(root2, text=maskCrowdData[index][2]).pack()
+    Radiobutton(root2, text="Low", variable=mask, value=0, command=mask.set("0")).pack()
+    Radiobutton(root2, text="Medium", variable=mask, value=1).pack()
+    Radiobutton(root2, text="High", variable=mask, value=2).pack()
+    Label(root2, text="Low crowd level reported").pack()
+    Label(root2, text=maskCrowdData[index][3]).pack()
+    Label(root2, text="Medium crowd level reported").pack()
+    Label(root2, text=maskCrowdData[index][4]).pack()
+    Label(root2, text="High crowd level reported").pack()
+    Label(root2, text=maskCrowdData[index][5]).pack()
+    Radiobutton(root2, text="Low", variable=crowd, value=0, command=crowd.set("0")).pack()
+    Radiobutton(root2, text="Medium", variable=crowd, value=1).pack()
+    Radiobutton(root2, text="High", variable=crowd, value=2).pack()
+    t4 = Label(root2, text=restaurantData[index][3], fg="red").pack()
+    submitButton = Button(root2, text="Submit Scores", command=submit).pack()
+
+def submit():
+    if mask != -1 or crowd != -1:
+        if mask == 0:
+            maskCrowdData[index][0] = maskCrowdData[index][0] + 1
+
+    else:
+        Label(root2, text=crowd, fg="red").pack()
 
 def login():
     global clicked
