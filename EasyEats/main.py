@@ -1,4 +1,35 @@
 from tkinter import *
+import mysql.connector
+
+db = mysql.connector.connect(
+    host = "localhost",
+    user = "root",
+    passwd = "SQLisnumber2!",
+    database = "food"
+)
+
+mycursor = db.cursor()
+
+#mycursor.execute("CREATE DATABASE food")
+#
+# mycursor.execute("CREATE TABLE place (id INT PRIMARY KEY AUTO_INCREMENT, "
+#                  "name VARCHAR(50) NOT NULL, mask_usage ENUM('LOW', 'MEDIUM', 'HIGH'), "
+#                  "crowd_level ENUM('LOW', 'MEDIUM', 'HIGH'), phone VARCHAR(20), "
+#                  "picture_id INT, FOREIGN KEY(picture_id) REFERENCES picture(id))")
+# mycursor.execute("INSERT INTO place(name, mask_usage, crowd_level, phone, picture_id) VALUES('McDonalds', 'LOW', 'MEDIUM', '555-6789', 1), "
+#                  "('Chipotle', 'MEDIUM', 'LOW', '123-7777', 2), "
+#                  "('Hengs Fancy Eatings', 'HIGH', 'HIGH', '420-1313', 3)")
+# db.commit()
+
+#mycursor.execute("CREATE TABLE picture (id INT PRIMARY KEY AUTO_INCREMENT, logo VARCHAR(50) NOT NULL, menu VARCHAR(50))")
+# mycursor.execute("INSERT INTO picture(logo, menu) VALUES('mcdonalds.png', 'mcdonaldsmenu.png'), "
+#                  "('chipotle.png', 'chipotlemenu.png'), "
+#                  "('heng.png', 'heng.png')")
+# db.commit()
+mycursor.execute("SELECT * FROM picture")
+for x in mycursor:
+    print(x)
+
 
 restaurantData = [["McDonald's", "Low Mask Usage", "Medium Crowd", "555-6789"],
             ["Chipotle", "Medium Mask Usage", "Low crowd", "123-7777"],
