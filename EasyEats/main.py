@@ -26,14 +26,18 @@ mycursor = db.cursor()
 #                  "('chipotle.png', 'chipotlemenu.png'), "
 #                  "('heng.png', 'heng.png')")
 # db.commit()
-mycursor.execute("SELECT * FROM picture")
+# mycursor.execute("SELECT * FROM place")
+# for x in mycursor:
+#     print(x)
+# mycursor.execute("SELECT name, mask_usage, crowd_level, phone FROM place")
+# for x in mycursor:
+#     print(x)
+
+restaurantData = []
+mycursor.execute("SELECT name, mask_usage, crowd_level, phone FROM place")
 for x in mycursor:
-    print(x)
+    restaurantData.append(list(x))
 
-
-restaurantData = [["McDonald's", "Low Mask Usage", "Medium Crowd", "555-6789"],
-            ["Chipotle", "Medium Mask Usage", "Low crowd", "123-7777"],
-            ["Heng's Fancy Eatings", "High Mask Usage", "High crowd", "420-1313"]]
 maskCrowdData = [[1, 0, 0, 0, 1, 0], [0, 1, 0, 1, 0, 0], [0, 0, 1, 0, 0, 1]]
 
 index = 0
@@ -42,6 +46,7 @@ mask = -1
 crowd = -1
 
 root = Tk()
+
 def browse():
     global photo1, photo2, photo3
     root1 = Toplevel()
